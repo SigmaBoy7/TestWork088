@@ -1,0 +1,11 @@
+// Example: Style from medium breakpoint and down
+.mainContainer {
+    padding-top: 80px;
+    width: 660px;
+    height: 100vh;
+}
+
+.weatherCard {
+    max-width: 100%;
+    margin-top: 25px;
+}
