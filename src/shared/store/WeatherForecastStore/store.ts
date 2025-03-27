@@ -28,6 +28,7 @@ export const useWeatherForecastStore = create<FavoritesStore>()(
 
       addFavorites: (citiesData) => {
         set((state) => {
+          console.log(state);
           const updated = new Set(state.favoriteCitiesWeather);
           updated.add(citiesData.name);
           return { favoriteCitiesWeather: updated };
@@ -60,14 +61,14 @@ export const useWeatherForecastStore = create<FavoritesStore>()(
       name: "weatherForecast-storage",
       storage: createJSONStorage(() => localStorage, {
         reviver: (key, value: unknown) => {
-          if (key === "favoriteCitiesWeather" && Array.isArray(value)) {
+          if (key === "favoriteCitiesWeather") {
             return new Set(value);
           }
 
           return value;
         },
         replacer: (key, value) => {
-          if (key === "favoriteCitiesWeather" && Array.isArray(value)) {
+          if (key === "favoriteCitiesWeather") {
             return [...value];
           }
           return value;

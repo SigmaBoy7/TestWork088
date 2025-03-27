@@ -6,7 +6,7 @@ import { FavoriteCityForecastCard } from "@/widgets";
 import { useEffect, useState } from "react";
 
 export default function FavoritesList() {
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [favoriteData, setFavoriteData] = useState<IWeatherData[] | null>(null);
   const favoritesWeather = useWeatherForecastStore(
     (state) => state.favoriteCitiesWeather
@@ -21,12 +21,15 @@ export default function FavoritesList() {
 
   useEffect(() => {
     (async function fetchData() {
-      await weatherClient
-        .getWeatherForFavorites(favoritesWeather)
-        .then((res) => {
-          setLoading(false);
-          setFavoriteData(res);
-        });
+      if (favoritesWeather.size) {
+        setLoading(true);
+        await weatherClient
+          .getWeatherForFavorites(favoritesWeather)
+          .then((res) => {
+            setLoading(false);
+            setFavoriteData(res);
+          });
+      }
     })();
   }, [favoritesWeather]);
 
@@ -38,7 +41,7 @@ export default function FavoritesList() {
     );
   }
 
-  if (!favoriteData?.length) {
+  if (!favoritesWeather.size) {
     return (
       <div className="alert alert-info mt-5" role="info">
         You dont have any favorites
