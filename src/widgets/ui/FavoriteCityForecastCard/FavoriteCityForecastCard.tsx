@@ -24,7 +24,6 @@ export default function FavoriteCityForecastCard({
             height={100}
           />
         </div>
-
         <div className="col-md-8">
           <div className="card-body text-md-end">
             <h5 className="card-title text-xxl-start fs-1">

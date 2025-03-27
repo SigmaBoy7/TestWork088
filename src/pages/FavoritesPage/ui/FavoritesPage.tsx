@@ -1,4 +1,4 @@
-import FavoritesList from "./ui/FavoriteList";
+import FavoritesList from "./FavoriteList";
 
 export default function FavoritesPage() {
   return (

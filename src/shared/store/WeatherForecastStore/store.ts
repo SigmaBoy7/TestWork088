@@ -62,13 +62,13 @@ export const useWeatherForecastStore = create<FavoritesStore>()(
       storage: createJSONStorage(() => localStorage, {
         reviver: (key, value: unknown) => {
           if (key === "favoriteCitiesWeather") {
-            return new Set(value as unknown[]); // or your specific type
+            return new Set(value as unknown[]);
           }
           return value;
         },
         replacer: (key, value) => {
           if (key === "favoriteCitiesWeather") {
-            return [...(value as Set<unknown>)]; // also assert Set type
+            return [...(value as Set<unknown>)];
           }
           return value;
         },

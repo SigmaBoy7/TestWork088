@@ -15,7 +15,7 @@ export default function CurrentWeatherForecastCard({
   return (
     <div className={"card mb-3 " + styles.weatherCard}>
       <div className="row g-0">
-        <div className={"col-md-4 d-flex justify-content-center "}>
+        <div className="col-md-4 d-flex justify-content-center">
           <Image
             src={`https://openweathermap.org/img/wn/${weatherForecastData.weather[0].icon}.png`}
             className="img-fluid rounded-start"
