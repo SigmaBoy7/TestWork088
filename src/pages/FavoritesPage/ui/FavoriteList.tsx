@@ -30,17 +30,6 @@ export default function FavoritesList() {
     })();
   }, [favoritesWeather]);
 
-  const favoritesCard = favoriteData?.map((data) => {
-    return (
-      <div key={data.name}>
-        <FavoriteCityForecastCard
-          handleRemoveFavoriteButton={handleRemoveFavoriteButton}
-          weatherForecastData={data}
-        />
-      </div>
-    );
-  });
-
   if (loading) {
     return (
       <div className="spinner-border m-5" role="status">
@@ -56,6 +45,17 @@ export default function FavoritesList() {
       </div>
     );
   }
+
+  const favoritesCard = favoriteData?.map((data) => {
+    return (
+      <div key={data.name}>
+        <FavoriteCityForecastCard
+          handleRemoveFavoriteButton={handleRemoveFavoriteButton}
+          weatherForecastData={data}
+        />
+      </div>
+    );
+  });
 
   return (
     <div className="mt-5">

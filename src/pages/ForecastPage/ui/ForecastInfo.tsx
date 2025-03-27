@@ -3,24 +3,35 @@ import ForecardDetailedInfoTable from "@/widgets/ui/ForecastDetailedInfo/Forecar
 import { useEffect, useState } from "react";
 import { WeatherForecastResponse } from "@/shared/types";
 import weatherClient from "@/shared/api";
+import { useSearchParams } from "next/navigation";
 
-export default function ForecastInfo({
-  city,
-}: {
-  city: string | null | undefined;
-}) {
+export default function ForecastInfo() {
   const [forecastInfo, setForecastInfo] =
     useState<WeatherForecastResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
+  const searchParams = useSearchParams();
+
   useEffect(() => {
-    (async function fetchData() {
-      await weatherClient.getDailytWeatherByCity(city).then((res) => {
-        setForecastInfo(res);
-        setLoading(false);
-      });
-    })();
-  }, [city]);
+    if (searchParams?.get("city")) {
+      (async function fetchData() {
+        await weatherClient
+          .getDailytWeatherByCity(searchParams?.get("city"))
+          .then((res) => {
+            setForecastInfo(res);
+            setLoading(false);
+          });
+      })();
+    }
+  }, [searchParams]);
+
+  if (!searchParams?.get("city")) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        No data
+      </div>
+    );
+  }
 
   if (loading) {
     return (

@@ -1,19 +1,14 @@
-"use client";
-import { redirect, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import ForecastInfo from "./ForecastInfo";
 
 export default function ForecastPage() {
-  const searchParams = useSearchParams();
-
-  if (!searchParams?.get("city")) {
-    redirect("/");
-  }
-
   return (
     <div>
       <p className="text-center fs-1">Detailed weather forecast</p>
       <div>
-        <ForecastInfo city={searchParams?.get("city")} />;
+        <Suspense fallback={<div>Loading...</div>}>
+          <ForecastInfo />;
+        </Suspense>
       </div>
     </div>
   );

@@ -59,7 +59,7 @@ export const useWeatherForecastStore = create<FavoritesStore>()(
     {
       name: "weatherForecast-storage",
       storage: createJSONStorage(() => localStorage, {
-        reviver: (key, value) => {
+        reviver: (key, value: unknown) => {
           if (key === "favoriteCitiesWeather" && Array.isArray(value)) {
             return new Set(value);
           }
